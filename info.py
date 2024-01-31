@@ -146,6 +146,10 @@ class UI(ABC):
     def output(self):
         pass
 
+    @abstractmethod
+    def input(self):
+        pass
+
 
 class CLI(UI):
     def __init__(self) -> None:
@@ -153,6 +157,9 @@ class CLI(UI):
 
     def output(self, text):
         print(text)
+
+    def input(self, user_input):
+        
 
 """
 

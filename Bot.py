@@ -18,7 +18,7 @@ class Bot:
             record = Record(name, phones, birth, email, status, note)
             return self.book.add(record)
         elif action == 'search':
-            self.cli_ui(
+            self.cli_ui.output(
                 "There are following categories: \nName \nPhones \nBirthday \nEmail \nStatus \nNote")
             category = input('Search category: ')
             pattern = input('Search pattern: ')
@@ -28,7 +28,7 @@ class Bot:
                     birth = account['birthday'].strftime("%d/%m/%Y")
                     result = "_" * 50 + "\n" + f"Name: {account['name']} \nPhones: {', '.join(account['phones'])} \nBirthday: {
                         birth} \nEmail: {account['email']} \nStatus: {account['status']} \nNote: {account['note']}\n" + "_" * 50
-                    print(result)
+                    self.cli_ui.output(result)
         elif action == 'edit':
             contact_name = input('Contact name: ')
             parameter = input(
@@ -45,13 +45,10 @@ class Bot:
             file_name = input("File name: ")
             return self.book.load(file_name)
         elif action == 'congratulate':
-            print(self.book.congratulate())
+            self.cli_ui.output(self.book.congratulate())
         elif action == 'view':
-            self.ui.output()
+            self.cli_ui.output(self.book)
         elif action == 'exit':
             pass
         else:
-            print("There is no such command!")
-
-
-
+            self.cli_ui.output("There is no such command!")
