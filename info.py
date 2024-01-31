@@ -143,11 +143,11 @@ class Note(Field):
 
 class UI(ABC):
     @abstractmethod
-    def output(self):
+    def custom_output(self):
         pass
 
     @abstractmethod
-    def input(self):
+    def custom_input(self):
         pass
 
 
@@ -155,22 +155,14 @@ class CLI(UI):
     def __init__(self) -> None:
         super().__init__()
 
-    def output(self, text):
+    def custom_input(self, output_for_user = None):
+        if output_for_user:
+            result = input(output_for_user)
+        else:
+            result = input()
+        return result
+
+
+    def custom_output(self, text):
         print(text)
-
-    def input(self, user_input):
-        
-
-"""
-
-class CLI(UI):
-    def __init__(self, book) -> None:
-        super().__init__()
-        self.book = book
-
-    def output(self):
-        print(self.book)
-"""
-
-
 
