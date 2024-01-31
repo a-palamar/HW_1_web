@@ -1,10 +1,11 @@
 from AddressBook import *
+from info import CLI
 
 
 class Bot:
     def __init__(self):
         self.book = AddressBook()
-        self.ui = CLI(self.book)
+        self.cli_ui = CLI()
 
     def handle(self, action):
         if action == 'add':
@@ -17,7 +18,7 @@ class Bot:
             record = Record(name, phones, birth, email, status, note)
             return self.book.add(record)
         elif action == 'search':
-            print(
+            self.cli_ui(
                 "There are following categories: \nName \nPhones \nBirthday \nEmail \nStatus \nNote")
             category = input('Search category: ')
             pattern = input('Search pattern: ')

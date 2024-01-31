@@ -77,13 +77,21 @@ class AddressBook(UserList):
         self.log("Addressbook has been saved!")
 
     def load(self, file_name):
-        emptyness = os.stat(file_name + '.bin')
+        try:
+            emptyness = os.stat(file_name + '.bin')
+        except FileNotFoundError:
+            # File doesn't exist, create an empty data structure
+            self.data = []
+            self.log('Adressbook has been created!')
+            return self.data
+
         if emptyness.st_size != 0:
             with open(file_name + '.bin', 'rb') as file:
                 self.data = pickle.load(file)
             self.log("Addressbook has been loaded!")
         else:
             self.log('Adressbook has been created!')
+
         return self.data
 
     def search(self, pattern, category):

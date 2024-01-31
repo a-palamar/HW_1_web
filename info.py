@@ -148,9 +148,22 @@ class UI(ABC):
 
 
 class CLI(UI):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def output(self, text):
+        print(text)
+
+"""
+
+class CLI(UI):
     def __init__(self, book) -> None:
         super().__init__()
         self.book = book
 
     def output(self):
         print(self.book)
+"""
+
+
+
